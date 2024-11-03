@@ -2,9 +2,10 @@
 import {useStore} from "vuex";
 import {computed, ref} from "vue";
 import FilterTask from "../components/tasks/Filter.vue";
+import CreateTask from "../components/tasks/Create.vue";
 export default {
   components:{
-    FilterTask,
+    FilterTask,CreateTask
   },
   setup() {
     const store = useStore();
@@ -34,6 +35,8 @@ export default {
       </div>
     </div>
     <div v-else class="container mt-5">
+      <CreateTask />
+      <hr/>
       <FilterTask/>
       <div class="row g-3">
         <div v-for="task in tasks" :key="task.id" class="col-md-4 ">
