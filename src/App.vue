@@ -8,7 +8,9 @@ export default {
 </script>
 
 <template>
-<Header />
+  <Header />
+
+  <router-view></router-view>
 </template>
 
 <style scoped>
