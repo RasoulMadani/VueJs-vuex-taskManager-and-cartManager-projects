@@ -28,6 +28,21 @@ const store = createStore({
                 })
             }
 
+        },
+        async filterTasks({commit},limit) {
+            console.log(limit);
+            try{
+                const response = await axios.get(`https://jsonplaceholder.typicode.com/todos?_limit=${limit}`)
+                commit('setTasks', response.data);
+            }catch (error){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Something went wrong',
+                    confirmButtonText: 'Ok',
+                    cancelButtonText: 'Cancel',
+                })
+            }
+
         }
     }
 })

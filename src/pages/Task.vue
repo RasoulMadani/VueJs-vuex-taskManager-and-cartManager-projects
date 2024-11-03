@@ -1,8 +1,11 @@
 <script>
 import {useStore} from "vuex";
 import {computed, ref} from "vue";
-
+import FilterTask from "../components/tasks/Filter.vue";
 export default {
+  components:{
+    FilterTask,
+  },
   setup() {
     const store = useStore();
     const tasks = computed(() => store.getters.allTasks);
@@ -25,12 +28,13 @@ export default {
 
 <template>
   <div>
-    <div v-if="loading" class="container">
-      <div class="row">
+    <div v-if="loading" class="container mt-5">
+      <div class="row justify-content-center">
         <div class="spinner-border" role="status"></div>
       </div>
     </div>
     <div v-else class="container mt-5">
+      <FilterTask/>
       <div class="row g-3">
         <div v-for="task in tasks" :key="task.id" class="col-md-4 ">
           <div class="card" :class="{'bg-light':task.completed}">
