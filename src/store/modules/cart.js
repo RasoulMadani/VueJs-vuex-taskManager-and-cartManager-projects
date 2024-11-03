@@ -1,5 +1,7 @@
 import Swal from "sweetalert2";
-
+function updateLocalStorage(cart) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
 const cart ={
     namespaced: true,
     state: {
@@ -16,7 +18,8 @@ const cart ={
            }else{
                item.quantity++;
            }
-           localStorage.setItem("cart", JSON.stringify(state.cart));
+           updateLocalStorage(state.cart);
+
         }
     },
     actions: {
