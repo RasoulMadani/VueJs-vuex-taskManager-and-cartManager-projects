@@ -11,8 +11,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home </a>
+        <li class="nav-item ">
+          <router-link to="/" class="nav-link" >Home </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/tasks" class="nav-link" >Tasks </router-link>
         </li>
       </ul>
 
@@ -21,5 +24,8 @@
 </template>
 
 <style scoped>
-
+.router-link-active {
+  color: rgba(0,0,0,0.9) !important;
+  border-bottom: 2px solid rgba(0,0,0,0.9) !important;
+}
 </style>

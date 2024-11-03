@@ -4,7 +4,7 @@ import TaskIndex from "./pages/Task.vue";
 
 const routes=[
     {name: 'home',path:'/',component:Home},
-    {name: 'task',path:'/task',component:TaskIndex},
+    {name: 'tasks',path:'/tasks',component:TaskIndex},
 ];
 
 
