@@ -3,9 +3,10 @@ import {useStore} from "vuex";
 import {computed, ref} from "vue";
 import FilterTask from "../components/tasks/Filter.vue";
 import CreateTask from "../components/tasks/Create.vue";
+import UpdateTask from "../components/tasks/Update.vue";
 export default {
   components:{
-    FilterTask,CreateTask
+    FilterTask,CreateTask,UpdateTask
   },
   setup() {
     const store = useStore();
@@ -41,9 +42,13 @@ export default {
       <div class="row g-3">
         <div v-for="task in tasks" :key="task.id" class="col-md-4 ">
           <div class="card" :class="{'bg-light':task.completed}">
-            <div class="card-body">
-              <del v-if="task.completed">{{ task.title }}</del>
-              <div v-else> {{ task.title }}</div>
+            <div class="card-body d-flex justify-content-between align-items-center ">
+              <div>
+                <del v-if="task.completed">{{ task.title }}</del>
+                <div v-else> {{ task.title }}</div>
+              </div>
+              <UpdateTask  :task="task" />
+
             </div>
           </div>
         </div>
