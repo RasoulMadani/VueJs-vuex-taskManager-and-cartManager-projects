@@ -8,11 +8,15 @@ export default {
     const store = useStore();
     const title = ref("");
     const titleErrorText= ref("");
-    function storeTask(){
+    async function storeTask(){
       if(title.value === ""){
         titleErrorText.value="title is required";
       }else{
         titleErrorText.value="";
+
+        await store.dispatch('storeTasks',title.value);
+
+        title.value="";
       }
 
     }
