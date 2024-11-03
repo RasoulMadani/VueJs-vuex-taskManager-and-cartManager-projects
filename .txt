@@ -7,3 +7,6 @@ npm install bootstrap
 
 
 npm install bootstrap-icons
+
+npm i axios
+

@@ -1,7 +1,10 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "./pages/Home.vue";
+import TaskIndex from "./pages/Task.vue";
+
 const routes=[
-    {name: 'home',path:'/',component:Home}
+    {name: 'home',path:'/',component:Home},
+    {name: 'task',path:'/task',component:TaskIndex},
 ];
 
 
