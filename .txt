@@ -10,3 +10,5 @@ npm install bootstrap-icons
 
 npm i axios
 
+npm i sweetalert2
+
