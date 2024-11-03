@@ -4,9 +4,10 @@ import {computed, ref} from "vue";
 import FilterTask from "../components/tasks/Filter.vue";
 import CreateTask from "../components/tasks/Create.vue";
 import UpdateTask from "../components/tasks/Update.vue";
+import DeleteTask from "../components/tasks/Delete.vue";
 export default {
   components:{
-    FilterTask,CreateTask,UpdateTask
+    FilterTask,CreateTask,UpdateTask,DeleteTask
   },
   setup() {
     const store = useStore();
@@ -47,7 +48,10 @@ export default {
                 <del v-if="task.completed">{{ task.title }}</del>
                 <div v-else> {{ task.title }}</div>
               </div>
-              <UpdateTask  :task="task" />
+              <div class=" d-flex justify-content-between align-items-center ">
+                <UpdateTask  :task="task" />
+                <DeleteTask :id="task.id" />
+              </div>
 
             </div>
           </div>
