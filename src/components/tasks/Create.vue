@@ -17,7 +17,7 @@ export default {
         loading.value = true;
         titleErrorText.value="";
 
-        await store.dispatch('storeTasks',title.value);
+        await store.dispatch('task/storeTasks',title.value);
         loading.value = false;
         title.value="";
       }
