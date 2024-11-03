@@ -1,8 +1,9 @@
+import Swal from "sweetalert2";
 
 const cart ={
     namespaced: true,
     state: {
-        cart: []
+        cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [],
     },
     mutations: {
         addToCart(state, product) {
@@ -15,13 +16,22 @@ const cart ={
            }else{
                item.quantity++;
            }
-            console.log(state.cart);
+           localStorage.setItem("cart", JSON.stringify(state.cart));
         }
     },
     actions: {
         addToCart({commit}, product) {
             console.log(product);
             commit("addToCart", product);
+            Swal.fire({
+                icon: 'success',
+                title: 'Product Added',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000,
+                toast: true,
+                position: "top",
+            })
         }
     }
 }
