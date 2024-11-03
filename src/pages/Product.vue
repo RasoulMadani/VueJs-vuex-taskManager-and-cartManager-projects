@@ -6,8 +6,12 @@ export default {
   setup() {
     const store = useStore();
     const products = computed(() => store.getters['product/allProduct']);
+    function addToCart(product){
+      store.dispatch('cart/addToCart',product);
+    }
     return {
-      products
+      products,
+      addToCart
     }
   }
 }
@@ -26,7 +30,7 @@ export default {
               <p>{{product.description}}</p>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
-              <button class="btn btn-outline-success btn-sm">Add to Cart</button>
+              <button @click="addToCart(product)" class="btn btn-outline-success btn-sm">Add to Cart</button>
               <span>{{product.price}}</span>
             </div>
           </div>
