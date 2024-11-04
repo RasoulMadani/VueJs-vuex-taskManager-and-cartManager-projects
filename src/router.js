@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router";
+import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 import Home from "./pages/Home.vue";
 import TaskIndex from "./pages/Task.vue";
 import ProductIndex from "./pages/Product.vue";
@@ -13,7 +13,7 @@ const routes=[
 
 
 const router = createRouter({
-    history:createWebHistory(),
+    history:createWebHashHistory(),
     routes
 })
 
