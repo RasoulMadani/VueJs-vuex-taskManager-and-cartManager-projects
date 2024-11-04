@@ -1,0 +1,14 @@
+npm install vue-router@4
+
+npm install vuex@next
+
+
+npm install bootstrap
+
+
+npm install bootstrap-icons
+
+npm i axios
+
+npm i sweetalert2
+
