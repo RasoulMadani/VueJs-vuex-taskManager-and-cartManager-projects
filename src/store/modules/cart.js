@@ -46,6 +46,14 @@ const cart ={
                 }
             }
             updateLocalStorage(state.cart);
+        },
+        removeFromCart(state, id) {
+           state.cart = state.cart.filter(cart=>cart.id !== id);
+            updateLocalStorage(state.cart);
+        },
+        clearCart(state) {
+            state.cart = [];
+            updateLocalStorage(state.cart);
         }
     },
     actions: {
@@ -79,6 +87,30 @@ const cart ={
             Swal.fire({
                 icon: 'success',
                 title: 'Product Update',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000,
+                toast: true,
+                position: "top",
+            })
+        },
+        removeFromCart({commit}, id) {
+            commit("removeFromCart", id);
+            Swal.fire({
+                icon: 'warning',
+                title: 'Product Deleted',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000,
+                toast: true,
+                position: "top",
+            })
+        },
+        clearCart({commit}) {
+            commit("clearCart");
+            Swal.fire({
+                icon: 'warning',
+                title: 'Cart Empty',
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 3000,

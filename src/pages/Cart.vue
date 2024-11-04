@@ -13,11 +13,19 @@ export default {
     function decrement(id){
       store.dispatch('cart/decrement',id);
     }
+    function clearCart(){
+      store.dispatch('cart/clearCart');
+    }
+    function removeFromCart(id){
+      store.dispatch('cart/removeFromCart',id);
+    }
     return {
       cartItems,
       cartTotalAmount,
       increment,
-      decrement
+      decrement,
+      clearCart,
+      removeFromCart
     }
   }
 }
@@ -65,7 +73,7 @@ export default {
             </td>
             <td class="align-middle">{{ item.price * item.quantity }}</td>
             <td class="align-middle" style="width: 15%">
-              <button class="btn btn-danger btn-sm">delete</button>
+              <button @click="removeFromCart(item.id)" class="btn btn-danger btn-sm">delete</button>
             </td>
           </tr>
 
@@ -73,7 +81,7 @@ export default {
           <tfoot>
           <tr>
             <td>
-              <a href="#" class="btn btn-dark">Clear Cart</a>
+              <button @click="clearCart" class="btn btn-dark">Clear Cart</button>
             </td>
             <td colspan="2" class="hidden-xs"></td>
             <td class="hidden-xs text-center" style="width: 15%">
