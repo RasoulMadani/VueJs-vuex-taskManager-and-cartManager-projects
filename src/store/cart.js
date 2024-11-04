@@ -2,10 +2,11 @@ import Swal from "sweetalert2";
 function updateLocalStorage(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
-const cart ={
-    namespaced: true,
-    state: {
-        cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [],
+export const useCartStore = defineStore("cart",{
+    state: ()=>{
+        return {
+            cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [],
+        }
     },
     getters: {
         countCartItems: state => state.cart.length,
@@ -18,48 +19,20 @@ const cart ={
             },0)
         }
     },
-    mutations: {
-        addToCart(state, product) {
-           const item = state.cart.find(p=>p.id === product.id);
-           if(!item){
-               state.cart.push({
-                   ...product,
-                   quantity:1
-               });
-           }else{
-               item.quantity++;
-           }
-           updateLocalStorage(state.cart);
-        },
-        increment(state, id) {
-            const item = state.cart.find(p=>p.id === id);
-            if(item){
+    actions: {
+        addToCart( product) {
+            const item = this.state.cart.find(p=>p.id === product.id);
+            if(!item){
+                this.state.cart.push({
+                    ...product,
+                    quantity:1
+                });
+            }else{
                 item.quantity++;
             }
-            updateLocalStorage(state.cart);
-        },
-        decrement(state, id) {
-            const item = state.cart.find(p=>p.id === id);
-            if(item){
-                if(item.quantity > 1){
-                    item.quantity--;
-                }
-            }
-            updateLocalStorage(state.cart);
-        },
-        removeFromCart(state, id) {
-           state.cart = state.cart.filter(cart=>cart.id !== id);
-            updateLocalStorage(state.cart);
-        },
-        clearCart(state) {
-            state.cart = [];
-            updateLocalStorage(state.cart);
-        }
-    },
-    actions: {
-        addToCart({commit}, product) {
-            console.log(product);
-            commit("addToCart", product);
+            updateLocalStorage(this.state.cart);
+
+
             Swal.fire({
                 icon: 'success',
                 title: 'Product Added',
@@ -70,8 +43,12 @@ const cart ={
                 position: "top",
             })
         },
-        increment({commit}, id) {
-            commit("increment", id);
+        increment(id) {
+            const item = this.state.cart.find(p=>p.id === id);
+            if(item){
+                item.quantity++;
+            }
+            updateLocalStorage(this.state.cart);
             Swal.fire({
                 icon: 'success',
                 title: 'Product Update',
@@ -82,8 +59,14 @@ const cart ={
                 position: "top",
             })
         },
-        decrement({commit}, id) {
-            commit("decrement", id);
+        decrement(id) {
+            const item = this.state.cart.find(p=>p.id === id);
+            if(item){
+                if(item.quantity > 1){
+                    item.quantity--;
+                }
+            }
+            updateLocalStorage(this.state.cart);
             Swal.fire({
                 icon: 'success',
                 title: 'Product Update',
@@ -94,8 +77,9 @@ const cart ={
                 position: "top",
             })
         },
-        removeFromCart({commit}, id) {
-            commit("removeFromCart", id);
+        removeFromCart( id) {
+            this.state.cart = this.state.cart.filter(cart=>cart.id !== id);
+            updateLocalStorage(this.state.cart);
             Swal.fire({
                 icon: 'warning',
                 title: 'Product Deleted',
@@ -106,8 +90,9 @@ const cart ={
                 position: "top",
             })
         },
-        clearCart({commit}) {
-            commit("clearCart");
+        clearCart() {
+            this.state.cart = [];
+            updateLocalStorage(this.state.cart);
             Swal.fire({
                 icon: 'warning',
                 title: 'Cart Empty',
@@ -119,5 +104,4 @@ const cart ={
             })
         }
     }
-}
-export default cart;
+})
