@@ -12,3 +12,6 @@ npm i axios
 
 npm i sweetalert2
 
+ npm uninstall vuex
+
+ npm i pinia
