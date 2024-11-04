@@ -7,6 +7,9 @@ const cart ={
     state: {
         cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [],
     },
+    getters: {
+        countCartItems: state => state.cart.length
+    },
     mutations: {
         addToCart(state, product) {
            const item = state.cart.find(p=>p.id === product.id);

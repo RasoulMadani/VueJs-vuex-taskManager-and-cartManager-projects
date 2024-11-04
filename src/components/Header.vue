@@ -1,5 +1,16 @@
-<script setup>
+<script >
+import {useStore} from "vuex";
+import {computed} from "vue";
 
+export default {
+  setup(){
+    const store  = useStore();
+    const countCartItems = computed(()=>store.getters["cart/countCartItems"]);
+    return {
+      countCartItems
+    }
+  }
+}
 </script>
 
 <template>
@@ -9,7 +20,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item ">
           <router-link to="/" class="nav-link" >Home </router-link>
@@ -19,6 +30,14 @@
         </li>
         <li class="nav-item">
           <router-link to="/products" class="nav-link" >Products </router-link>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-auto me-4">
+        <li class="nav-item">
+          <router-link to="/cart" class="nav-link me-1 p-1" >
+            <span class="badge rounded-pill bg-primary me-1">{{ countCartItems }}</span>
+            <i class="bi bi-basket-fill" style="font-size: 23px"></i>
+          </router-link>
         </li>
       </ul>
 
