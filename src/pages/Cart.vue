@@ -7,10 +7,17 @@ export default {
     const store = useStore();
     const cartItems = computed(() => store.getters['cart/allItems']);
     const cartTotalAmount = computed(() => store.getters["cart/totalAmount"]);
-
+    function increment(id){
+      store.dispatch('cart/increment',id);
+    }
+    function decrement(id){
+      store.dispatch('cart/decrement',id);
+    }
     return {
       cartItems,
-      cartTotalAmount
+      cartTotalAmount,
+      increment,
+      decrement
     }
   }
 }
@@ -52,9 +59,9 @@ export default {
             </td>
             <td class="align-middle">{{ item.price }}</td>
             <td class="align-middle">
-              <button class="btn btn-sm btn-dark me-2">+</button>
+              <button @click="increment(item.id)" class="btn btn-sm btn-dark me-2">+</button>
               <span>{{ item.quantity }}</span>
-              <button class="btn btn-sm btn-dark ms-2">-</button>
+              <button @click="decrement(item.id)" class="btn btn-sm btn-dark ms-2">-</button>
             </td>
             <td class="align-middle">{{ item.price * item.quantity }}</td>
             <td class="align-middle" style="width: 15%">

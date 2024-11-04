@@ -30,7 +30,22 @@ const cart ={
                item.quantity++;
            }
            updateLocalStorage(state.cart);
-
+        },
+        increment(state, id) {
+            const item = state.cart.find(p=>p.id === id);
+            if(item){
+                item.quantity++;
+            }
+            updateLocalStorage(state.cart);
+        },
+        decrement(state, id) {
+            const item = state.cart.find(p=>p.id === id);
+            if(item){
+                if(item.quantity > 1){
+                    item.quantity--;
+                }
+            }
+            updateLocalStorage(state.cart);
         }
     },
     actions: {
@@ -40,6 +55,30 @@ const cart ={
             Swal.fire({
                 icon: 'success',
                 title: 'Product Added',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000,
+                toast: true,
+                position: "top",
+            })
+        },
+        increment({commit}, id) {
+            commit("increment", id);
+            Swal.fire({
+                icon: 'success',
+                title: 'Product Update',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000,
+                toast: true,
+                position: "top",
+            })
+        },
+        decrement({commit}, id) {
+            commit("decrement", id);
+            Swal.fire({
+                icon: 'success',
+                title: 'Product Update',
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 3000,
