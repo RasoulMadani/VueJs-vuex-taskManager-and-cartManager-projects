@@ -1,23 +1,23 @@
 <script>
-import {useStore} from "vuex";
+import {useCartStore} from "../store/cart.js";
 import {computed} from "vue";
 
 export default {
   setup() {
-    const store = useStore();
-    const cartItems = computed(() => store.getters['cart/allItems']);
-    const cartTotalAmount = computed(() => store.getters["cart/totalAmount"]);
+    const store = useCartStore();
+    const cartItems = computed(() => store.allItems);
+    const cartTotalAmount = computed(() => store.totalAmount);
     function increment(id){
-      store.dispatch('cart/increment',id);
+      store.increment(id);
     }
     function decrement(id){
-      store.dispatch('cart/decrement',id);
+      store.decrement(id);
     }
     function clearCart(){
-      store.dispatch('cart/clearCart');
+      store.clearCart();
     }
     function removeFromCart(id){
-      store.dispatch('cart/removeFromCart',id);
+      store.removeFromCart(id);
     }
     return {
       cartItems,

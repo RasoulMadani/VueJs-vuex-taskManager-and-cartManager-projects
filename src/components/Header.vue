@@ -1,11 +1,11 @@
 <script >
-import {useStore} from "vuex";
+import {useCartStore} from "../store/cart.js";
 import {computed} from "vue";
 
 export default {
   setup(){
-    const store  = useStore();
-    const countCartItems = computed(()=>store.getters["cart/countCartItems"]);
+    const store  = useCartStore();
+    const countCartItems = computed(()=>store.countCartItems);
     return {
       countCartItems
     }

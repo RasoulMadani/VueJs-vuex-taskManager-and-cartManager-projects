@@ -15,7 +15,7 @@ export const useTaskStore = defineStore('task',{
         async fetchTasks() {
             try{
                 const response = await axios.get("https://jsonplaceholder.typicode.com/todos")
-                this.state.tasks = response.data;
+                this.tasks = response.data;
             }catch (error){
                 Swal.fire({
                     icon: 'error',
@@ -30,7 +30,7 @@ export const useTaskStore = defineStore('task',{
 
             try{
                 const response = await axios.get(`https://jsonplaceholder.typicode.com/todos?_limit=${limit}`)
-                this.state.tasks = response.data;
+                this.tasks = response.data;
             }catch (error){
                 Swal.fire({
                     icon: 'error',
@@ -49,7 +49,7 @@ export const useTaskStore = defineStore('task',{
                     title,
                     completed: false
                 })
-                this.state.tasks.unshift(response.data);
+                this.tasks.unshift(response.data);
 
                 Swal.fire({
                     icon: 'success',
@@ -78,9 +78,9 @@ export const useTaskStore = defineStore('task',{
                     title: task.title,
                     completed: !task.completed,
                 })
-                const index = this.state.tasks.findIndex(task => task.id === response.data.id);
+                const index = this.tasks.findIndex(task => task.id === response.data.id);
                 if (index > -1) {
-                    this.state.tasks.splice(index,1,response.data);
+                    this.tasks.splice(index,1,response.data);
                 }
 
                 Swal.fire({
@@ -106,7 +106,7 @@ export const useTaskStore = defineStore('task',{
         async deleteTask(id) {
             try{
                 await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-                this.state.tasks = this.state.tasks.filter(task => task.id !== id);
+                this.tasks = this.tasks.filter(task => task.id !== id);
 
                 Swal.fire({
                     icon: 'warning',
