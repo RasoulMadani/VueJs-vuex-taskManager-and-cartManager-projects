@@ -34,7 +34,16 @@ export default {
 <template>
   <div class="container">
     <div class="row mt-5">
-      <div class="col-lg-12 pl-3 pt-3">
+      <div class="text-center col-md-12" v-if="cartItems.length === 0">
+        <div>
+          <i class="bi bi-basket-fill" style="font-size: 100px"></i>
+        </div>
+        <h3 class="text-bold">Cart is empty</h3>
+        <router-link to="/products" class="btn btn-outline-dark mt-3">
+          Products
+        </router-link>
+      </div>
+      <div v-else class="col-lg-12 pl-3 pt-3">
         <table class="table table-hover border bg-white">
           <thead>
           <tr>
