@@ -1,11 +1,11 @@
 <script >
-import {useStore} from "vuex";
+import {useTaskStore} from "../../store/task.js";
 import {ref} from "vue";
 
 export default {
 
   setup(){
-    const store = useStore();
+    const store = useTaskStore();
     const title = ref("");
     const titleErrorText= ref("");
     const loading = ref(false);
@@ -17,7 +17,7 @@ export default {
         loading.value = true;
         titleErrorText.value="";
 
-        await store.dispatch('task/storeTasks',title.value);
+        await store.storeTasks(title.value);
         loading.value = false;
         title.value="";
       }

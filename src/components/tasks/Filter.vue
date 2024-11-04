@@ -1,14 +1,14 @@
 <script >
-import {useStore} from "vuex";
+import {useTaskStore} from "../../store/task.js";
 import {ref} from "vue";
 
 export default {
 
   setup(){
-    const store = useStore();
+    const store = useTaskStore();
     const number = ref();
     function filterTasks(){
-      store.dispatch('task/filterTasks',number.value);
+      store.filterTasks(number.value);
     }
     return {
     filterTasks,number

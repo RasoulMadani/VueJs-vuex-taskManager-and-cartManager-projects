@@ -1,32 +1,23 @@
-<script>
-import {useStore} from "vuex";
+<script setup>
+import {useTaskStore} from "../store/task.js";
 import {computed, ref} from "vue";
 import FilterTask from "../components/tasks/Filter.vue";
 import CreateTask from "../components/tasks/Create.vue";
 import UpdateTask from "../components/tasks/Update.vue";
 import DeleteTask from "../components/tasks/Delete.vue";
-export default {
-  components:{
-    FilterTask,CreateTask,UpdateTask,DeleteTask
-  },
-  setup() {
-    const store = useStore();
-    const tasks = computed(() => store.getters['task/allTasks']);
+
+    const store = useTaskStore();
+    const tasks = computed(() => store.allTasks);
     const loading = ref(false);
 
     async function fetchTasks() {
       loading.value = true;
-      await store.dispatch("task/fetchTasks");
+      await store.fetchTasks();
       loading.value = false;
     }
 
-    fetchTasks();
-    return {
-      tasks,
-      loading
-    }
-  }
-}
+    fetchTasks()
+
 </script>
 
 <template>
