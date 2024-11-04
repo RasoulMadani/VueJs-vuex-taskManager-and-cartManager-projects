@@ -8,7 +8,15 @@ const cart ={
         cart: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [],
     },
     getters: {
-        countCartItems: state => state.cart.length
+        countCartItems: state => state.cart.length,
+        allItems(state){
+            return state.cart
+        },
+        totalAmount(state){
+            return state.cart.reduce((total, item) => {
+                return total + item.price * item.quantity;
+            },0)
+        }
     },
     mutations: {
         addToCart(state, product) {

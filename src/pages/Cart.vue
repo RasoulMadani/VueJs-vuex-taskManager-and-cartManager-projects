@@ -5,11 +5,12 @@ import {computed} from "vue";
 export default {
   setup() {
     const store = useStore();
-    const cartItems = computed(() => store.state.cart.cart);
-
+    const cartItems = computed(() => store.getters['cart/allItems']);
+    const cartTotalAmount = computed(() => store.getters["cart/totalAmount"]);
 
     return {
       cartItems,
+      cartTotalAmount
     }
   }
 }
